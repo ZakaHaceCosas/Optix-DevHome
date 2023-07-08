@@ -6,8 +6,7 @@ The objective of Optix DevHome is to create a simple but powerful solution for b
 What to implement:
 > (**Bold** = Implemented / ***Bold + Italic*** = Implemented and tested / Normal = Non implemented / Working on it):
 
-- **Connect to remote Git repositories and clone them onto user's selected location.**
-    - Remember Git URL
+- Connect to remote Git repositories (at least GitHub and GitLab) and clone them onto user's selected location.
 - Send PRs, commits, and more.
 - Implement Projects
     - Project setups
@@ -23,15 +22,15 @@ You will need to install Lua to work on this project. For now it's not using any
 
 Don't have Lua? Here's the command for major Linux systems, macOS, and Windows.
 - **Debian or Ubuntu**
-```bash
+```
 sudo apt-get install lua5.3
 ```
 - **Fedora or CentOS**
-```bash
+```
 sudo dnf install lua
 ```
 - **Arch**
-```bash
+```
 sudo pacman -S lua
 ```
 - **macOS**
@@ -55,12 +54,4 @@ For easier navigation, some comments have keywords (for when you use search in V
 
 `NOTE` - Things that are undone or that will be changed.
 
----
-You want to preview your changes? Hit Save on your IDE, open up a terminal, and run
-```bash
-lua main.lua
-```
-It will run instantly so you can try it. No compiling, waiting, or anything like that. It's Lua.
-
----
-Well, that's it! You're now ready to write some fancy code on this project. Have fun and thanks for contributing!
+Well, that's it! You're now ready to code on this project.
