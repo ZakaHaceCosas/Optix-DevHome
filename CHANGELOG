@@ -1,0 +1,5 @@
+# Optix DevHome CHANGELOG
+## Version 0.0.1 - Released 08/07/2023
+---
+- First actual PR!
+- Implemented Git cloning and directory creating
