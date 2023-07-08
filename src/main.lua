@@ -1,12 +1,4 @@
--- we look for /home/[user]/OptixDevHome/projects.OPTdhData
--- .OPTdhData = OPTix devhome data (at the end is just plain text, the custom extension is just to avoid using .txt)
-local lfs = require "lfs"
-local osSeparator = package.config:sub(1, 1) -- We get the OS path separator
-
--- These are the paths
-local homeDir = os.getenv("HOME") or os.getenv("USERPROFILE") or "" -- Platform-independent user home directory
-local directoryPath = homeDir .. osSeparator .. "OptixDevHome"
-local filePath = directoryPath .. osSeparator .. "projects.OPTdhData"
+dofile("config.lua") -- tidy up by moving variables here
 
 -- Check if the directory exists, create it if not
 if not lfs.attributes(directoryPath, "mode") then
@@ -14,9 +6,9 @@ if not lfs.attributes(directoryPath, "mode") then
 end
 
 -- Check if the file exists, create it if not
-local file = io.open(filePath, "w")
+local file = io.open(filePath, "a")
 if not file then
-  file = io.open(filePath, "w")
+  file = io.open(filePath, "a")
 end
 -- Now we have the data file. This will store our projects.
 
@@ -28,7 +20,7 @@ local function readInput(prompt)
 end
 
 -- Default location of the folder we'll use for our repo
-local defaultDestination = homeDir .. "/dhr-[nombre de tu proyecto]"
+local defaultDestination = homeDir .. "/dhr-[nombreProyecto]"
 
 -- Here we ask for the proyect name
 local projectName = readInput("Introduce el nombre del proyecto")
@@ -40,7 +32,7 @@ local repoURL = readInput("Introduce la URL del repositorio Git")
 -- WAR: when you leave empty it doesn't act as expected. will fix it.
 local destinationPath = readInput("Introduce la ruta de destino (por defecto: " .. defaultDestination .. ")")
 
--- well this is the line that should make use of the defaultDestination if you don't provide anything...
+-- if we give an empty path, use default
 if destinationPath == "" then
     destinationPath = defaultDestination .. "/dhr-" .. projectName
 end
@@ -86,8 +78,7 @@ file:close()
 -- needs reviewing.
 
 -- uses the native git command for cloning the repo.
--- NOTE: we should make it verify if you have git or not, and if you dont, idk if ask to install it
--- or make it come preinstalled on /lib
+-- NOTE: we should make it verify if you have git or not, and if you dont, ask to install it
 local gitCommand = string.format("git clone %s %s", repoURL, destinationPath)
 local cloneSuccess = os.execute(gitCommand)
 
