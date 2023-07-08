@@ -6,7 +6,8 @@ The objective of Optix DevHome is to create a simple but powerful solution for b
 What to implement:
 > (**Bold** = Implemented / ***Bold + Italic*** = Implemented and tested / Normal = Non implemented / Working on it):
 
-- Connect to remote Git repositories (at least GitHub and GitLab) and clone them onto user's selected location.
+- **Connect to remote Git repositories and clone them onto user's selected location.**
+    - Remember Git URL
 - Send PRs, commits, and more.
 - Implement Projects
     - Project setups
