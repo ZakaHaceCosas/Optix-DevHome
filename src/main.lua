@@ -1,12 +1,31 @@
+-- we look for /home/[user]/OptixDevHome/projects.OPTdhData
+-- .OPTdhData = OPTix devhome data (at the end is just plain text, the custom extension is just to avoid using .txt)
+local lfs = require "lfs"
+local osSeparator = package.config:sub(1, 1) -- We get the OS path separator
+
+-- These are the paths
+local homeDir = os.getenv("HOME") or os.getenv("USERPROFILE") or "" -- Platform-independent user home directory
+local directoryPath = homeDir .. osSeparator .. "OptixDevHome"
+local filePath = directoryPath .. osSeparator .. "projects.OPTdhData"
+
+-- Check if the directory exists, create it if not
+if not lfs.attributes(directoryPath, "mode") then
+  lfs.mkdir(directoryPath)
+end
+
+-- Check if the file exists, create it if not
+local file = io.open(filePath, "w")
+if not file then
+  file = io.open(filePath, "w")
+end
+-- Now we have the data file. This will store our projects.
+
 -- We read user's prompt onto the terminal
 local function readInput(prompt)
     io.write(prompt .. ": ")
     io.flush()
     return io.read()
 end
-
--- Where is the user folder? This line answers that
-local homeDir = os.getenv("HOME") or os.getenv("USERPROFILE")
 
 -- Default location of the folder we'll use for our repo
 local defaultDestination = homeDir .. "/dhr-[nombre de tu proyecto]"
@@ -54,6 +73,17 @@ else
         return
     end
 end
+
+-- we save the project to our .OPTdhData file
+file:write(projectName .. " {\n")
+file:write("    path: " .. destinationPath .. "\n")
+file:write("    repo: " .. repoURL .. "\n")
+file:write("}\n")
+
+file:flush()
+file:close()
+-- ERR: this is unstable. sometimes works, sometimes not, sometimes writes once and not twice...
+-- needs reviewing.
 
 -- uses the native git command for cloning the repo.
 -- NOTE: we should make it verify if you have git or not, and if you dont, idk if ask to install it
