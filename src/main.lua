@@ -19,11 +19,11 @@ local function readInput(prompt)
     return io.read()
 end
 
--- Default location of the folder we'll use for our repo
-local defaultDestination = homeDir .. "/dhr-[nombreProyecto]"
-
 -- Here we ask for the proyect name
 local projectName = readInput("Introduce el nombre del proyecto")
+
+-- Default location of the folder we'll use for our repo
+local defaultDestination = homeDir .. "/dhr-" .. projectName
 
 -- We ask for the URL of the repo, so we can clone the repo.
 local repoURL = readInput("Introduce la URL del repositorio Git")
@@ -34,7 +34,7 @@ local destinationPath = readInput("Introduce la ruta de destino (por defecto: " 
 
 -- if we give an empty path, use default
 if destinationPath == "" then
-    destinationPath = defaultDestination .. "/dhr-" .. projectName
+    destinationPath = defaultDestination
 end
 
 -- Verify if directory you gave exists. if it does, ok. if not, asks wether to create it or not.
@@ -74,8 +74,6 @@ file:write("}\n")
 
 file:flush()
 file:close()
--- ERR: this is unstable. sometimes works, sometimes not, sometimes writes once and not twice...
--- needs reviewing.
 
 -- uses the native git command for cloning the repo.
 -- NOTE: we should make it verify if you have git or not, and if you dont, ask to install it
