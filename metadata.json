@@ -1,12 +1,12 @@
 {
-    "name": "Optix Dev Home",
+    "name": "Optix DevHome",
     "version": "0.0.2",
     "author": {
       "name": "Optix",
-      "website": "https://optix.rf.gd"
+      "website": "https://optix.rf.gd/bio"
     },
     "description": "Development just has to be connected.",
-    "keywords": ["dev home", "dev kit", "developer tools"],
+    "keywords": ["devhome", "dev kit", "developer tools", "dev productivity"],
     "homepage": "https://optix.rf.gd/apps/devhome",
     "repository": {
       "type": "git",
@@ -15,9 +15,9 @@
     "license": "GNU GPL v3",
     "main": "src/main.lua",
     "app": {
-      "platforms": ["Linux"],
+      "platforms": ["Windows", "Linux"],
       "categories": ["Programming", "Productivity"],
-      "supportedDevices": ["PC"],
+      "supportedDevices": "PC",
       "permissions": ["Storage"]
     },
     "changelog": "CHANGELOG.md",
