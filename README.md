@@ -1,36 +1,45 @@
 # Optix-DevHome
 "*Development just has to be connected*"
 ---
+## About
+
 The objective of Optix DevHome is to create a simple but powerful solution for both solo developers & team developers, built on top of the **Lua** programming language.
 
-What to implement:
-> (**Bold** = Implemented / ***Bold + Italic*** = Implemented and tested / Normal = Non implemented / Working on it):
+## What to implement:
 
-- Connect to remote Git repositories (at least GitHub and GitLab) and clone them onto user's selected location.
+> **Bold** = Implemented<br>***Bold + Italic*** = Implemented and tested<br>Normal = Non implemented / Working on it:
+
+- ***Connect to remote Git repositories and clone them onto user's selected location.***
 - Send PRs, commits, and more.
 - Implement Projects
-    - Project setups
-    > Project setups are a way to speed up workflows: you click once, and all the programs you need are open and all the libraries & dependencies you need get updated and installed if needed. (That's the idea tho)
-    - Project files
-    - Project sharing
+    - **Basic Project saving**
+        - Advanced Project saving
+            - Project setups
+            > Project setups are a way to speed up workflows: you click once, and all the programs you need are open and all the libraries & dependencies you need get updated and installed if needed. (That's the idea tho)
+            - Project files
+            - Project sharing
+- Multiple languages
+> *Note: Optix DevHome will be first developed in spanish, then ported to english, and after that we'll see. This isn't a priority for now.*
 - GUI
-    - Multiple languages
-    > *Note: Optix DevHome will be first developed in spanish, then ported to english, and after that we'll see. This isn't a priority for now.*
+    - GUI based on the Umbra design system (Link to Figma soon)
 
-### Documentation
-You will need to install Lua to work on this project. For now it's not using any library.
+## Documentation
+
+### Set up
+
+You will need to install Lua to work on this project. For now it's not using any other library or framework.
 
 Don't have Lua? Here's the command for major Linux systems, macOS, and Windows.
 - **Debian or Ubuntu**
-```
+```bash
 sudo apt-get install lua5.3
 ```
 - **Fedora or CentOS**
-```
+```bash
 sudo dnf install lua
 ```
 - **Arch**
-```
+```bash
 sudo pacman -S lua
 ```
 - **macOS**
@@ -43,7 +52,8 @@ brew install lua
 
 Just get it from [Lua's website](https://lua.org/download.html)
 
----
+## Editing
+
 Ok, you're ready. Files are commented for you to easily get what does each line do. Just do your nice contribution, and when you're done, make a ***Pull Request***. Don't forget to comment your code and/or changes aswell.
 
 For easier navigation, some comments have keywords (for when you use search in VSCode or your preference IDE).
@@ -54,4 +64,20 @@ For easier navigation, some comments have keywords (for when you use search in V
 
 `NOTE` - Things that are undone or that will be changed.
 
-Well, that's it! You're now ready to code on this project.
+## Testing
+
+Open up a terminal. It will probably open on the source directory. Enter the `src` directory:
+```bash
+cd src
+```
+
+Then run the following command:
+```bash
+lua main.lua
+```
+
+Just like that, the program will run on the terminal, ready to test.
+(Note: You *must* be on the `src` directory from the terminal before running, or else Lua will return that `config.lua` wasn't found.)
+
+
+Well, that's it! You're now ready to write some fancy code on this project. Have fun and thanks for contributing!
