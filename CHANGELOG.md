@@ -1,5 +1,17 @@
 # Optix DevHome CHANGELOG
-Every update is logged here. Updates that don't make significant changes, or don't fully implement anything, won't be logged.
+Every update is logged here.
+## Version 0.0.4
+---
+- Finally, HALF implementation of the .optixData parser
+- Renamed some variables
+- Optimised the code
+- Some works to UX
+- - Creation of a home menu
+- - Added `about` command (Soon also a `help` command)
+- - Now prompts are colored to create visual meaning
+- Optimised .optixData files
+- Added the GUI-mode option (currently not working as `windows.lua` will wait for version `0.0.5`)
+- Added an ASCII on startup. Because, why not?
 ## Version 0.0.3
 ---
 - Implemented a main menu
