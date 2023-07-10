@@ -46,21 +46,42 @@ else
 end
 
 -- we save the project to our .optixData configFile
-configFile:write(projectName .. " {\n")
-configFile:write("    path: " .. destinationPath .. "\n")
-configFile:write("    repo: " .. repoURL .. "\n")
-configFile:write("}\n")
-
-configFile:flush()
-configFile:close()
-
+-- WARN - skipped behavior: this check doesnt work, projects still allow duplicates
+local function projectExists(projectName, configFile)
+    configFile:seek("set") --
+    local line = configFile:read("*line")
+    while line do
+      if line == projectName then
+        return true -- exists
+      end
+      line = configFile:read("*line")
+    end
+    return false -- does not exist (so we can create it)
+  end
+  
+  -- is it already on the file?
+  if projectExists(projectName, configFile) then
+    print(terminalTextColorRed .. "¡Error! El proyecto ya existe." .. terminalTextColorReset)
+    return -- end
+  end
+  
+  -- if we create it, we write it to configFile
+  configFile:seek("end")
+  configFile:write(projectName .. "\n")
+  configFile:write("    path: " .. destinationPath .. "\n")
+  configFile:write("    repo: " .. repoURL .. "\n")
+  configFile:write("\n")
+  
+  configFile:flush()
+  configFile:close()
+  
 -- uses the native git command for cloning the repo.
 -- NOTE: we should make it verify if you have git or not, and if you dont, ask to install it
 local gitCommand = string.format("git clone %s %s", repoURL, destinationPath)
 local cloneSuccess = os.execute(gitCommand)
 
 if cloneSuccess then
-    print("\n¡Proyecto creado en " .. destinationPath .. "con éxito!\n")
+    print("\n¡Proyecto creado en " .. destinationPath .. " con éxito!\n")
 else
     print("\nError al clonar el repositorio. Verifica la URL y la ruta de destino.\n")
 end

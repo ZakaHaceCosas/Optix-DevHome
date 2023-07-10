@@ -1,12 +1,19 @@
--- we look for /home/[user]/OptixDevHome/projects.optixData
+-- we look for /home/[user]/.OptixDevHome/projects.optixData
 -- (.optixData to avoid using plain .txt files)
 lfs = require "lfs"
 osSeparator = package.config:sub(1, 1) -- We get the OS path separator
 
 -- These are the paths for our project files
 homeDir = os.getenv("HOME") or os.getenv("USERPROFILE") or ""
-configDirectoryPath = homeDir .. osSeparator .. "OptixDevHome"
+configDirectoryPath = homeDir .. osSeparator .. ".OptixDevHome"
 configFilePath = configDirectoryPath .. osSeparator .. "projects.optixData"
+
+terminalTextColorRed = "\27[31m"
+terminalTextColorGreen = "\27[32m"
+terminalTextColorBold = "\27[1m" -- a format, not a color tho
+terminalTextColorYellow = "\27[33m"
+terminalTextColorBlue = "\27[36m"
+terminalTextColorReset = "\27[0m" -- add this at the end of each colored sentence
 
 -- Check if the config directory exists, create it if not
 if not lfs.attributes(configDirectoryPath, "mode") then
