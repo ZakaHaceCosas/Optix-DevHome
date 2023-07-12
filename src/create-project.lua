@@ -1,6 +1,7 @@
 dofile("config.lua") -- tidy up by moving variables here
+dofile("optixDataParser.lua") -- THE PARSER (it took too long to make it work)
 
--- Here we ask for the proyect name
+-- Here we ask for the proyect name and check if it's valid
 local projectName = readInput("\nPonle nombre a tu proyecto\n")
 
 -- Default location of the folder we'll use for our repo
@@ -18,7 +19,7 @@ if destinationPath == "" then
 end
 
 -- Verify if directory you gave exists. if it does, ok. if not, asks wether to create it or not.
--- NOTE: if you dont create it, it will closes. will change it so it goes back to the naming step.
+-- NOTE: if you dont create it, it closes. will change it so it goes back to the naming step.
 local folderExists = os.execute("cd " .. destinationPath)
 
 if folderExists then

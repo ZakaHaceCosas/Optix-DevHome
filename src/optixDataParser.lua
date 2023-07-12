@@ -1,8 +1,12 @@
--- OK I THINK THIS WORKS
+-- OK I THINK THIS ACTUALLY WORKS, FINALLY
 dofile("config.lua")
 
 local projects = {}
 local readConfigFile = io.open(configFilePath, "r")
+
+function string.trim(s)
+  return s:match'^()%s*$' and '' or s:match'^%s*(.*%S)'
+end
 
 function split(str, sep)
   local fields = {}
@@ -36,6 +40,15 @@ function searchProject(name)
   return nil
 end
 
+function searchProjectFor(name)
+  for projectName, project in pairs(projects) do
+    if string.lower(string.trim(projectName)) == string.lower(string.trim(name)) then
+      return nil
+    end
+  end
+  return nil
+end
+
 -- Function to count the number of projects
 function countProjects()
   local count = 0
@@ -46,17 +59,10 @@ function countProjects()
 end
 
 -- Debugging statements to print out project names
-for projectName, _ in pairs(projects) do
-  print("Project name: " .. projectName)
-end
+isDebuggingDataParser = false -- set to true in case of errors
 
--- Example usage
-local project = searchProject("notabena")
-if project then
-  print("Found project: " .. project.path .. " (" .. project.repo .. ")")
-else
-  print("Project not found")
+if isDebuggingDataParser then
+  for projectName, _ in pairs(projects) do
+    print("Project name: " .. projectName)
+  end
 end
-
-local numProjects = countProjects()
-print("Number of projects: " .. numProjects)

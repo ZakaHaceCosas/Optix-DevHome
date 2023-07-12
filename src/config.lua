@@ -1,5 +1,4 @@
 -- we look for /home/[user]/.OptixDevHome/projects.optixData
--- (.optixData to avoid using plain .txt files)
 lfs = require "lfs"
 osSeparator = package.config:sub(1, 1) -- We get the OS path separator
 

@@ -1,4 +1,8 @@
 dofile("config.lua") -- tidy up by moving variables here
+local isTestingGUIBeta = true
+
+if isTestingGUIBeta == true then
+local userWantsGUIBeta = readInput(terminalTextColorYellow .. "Hey, developers! Want to try the new GTK based GUI? (y/n)" .. terminalTextColorReset .. terminalTextColorRed .. "\n(IT IS VERY UNSTABLE, MAY NOT WORK AS EXPECTED)" .. terminalTextColorReset)
 local userWantsGUIBeta = readInput(terminalTextColorYellow .. "Hey, developers! Want to try the new LGI / GTK based GUI? (y/n)" .. terminalTextColorReset .. terminalTextColorRed .. "\n(Hit 'n', as the 'windows.lua' file is not included yet)" .. terminalTextColorReset)
     if userWantsGUIBeta == "y" then
         dofile("windows.lua")
@@ -7,6 +11,7 @@ local userWantsGUIBeta = readInput(terminalTextColorYellow .. "Hey, developers! 
     else
         print("\nOptix DevHome will now run from your terminal\n")
     end
+end
 
 print(terminalTextColorGreen .. terminalTextColorBold .. "Optix DevHome ALPHA 0.0.4 - 'Development just has to be connected.' - Idioma: ES\n------\n" .. terminalTextColorReset)
 
@@ -14,6 +19,8 @@ print(terminalTextColorGreen .. terminalTextColorBold .. "Optix DevHome ALPHA 0.
 isStartPromptValid = false
 
 dofile("ascii.lua")
+
+print(terminalTextColorGreen .. terminalTextColorBold .. "Optix DevHome ALPHA 0.0.4 - 'Development just has to be connected.' - Idioma: ES\n------\n" .. terminalTextColorReset)
 
 while not isStartPromptValid do
     local atStartPrompt = readInput("Bienvenido a Optix DevHome. ¿Qué quieres hacer?\nnew - Crear nuevo proyecto.\nopn - Abrir proyecto existente\nabout - Información sobre Optix DevHome\nend - Salir del programa")
