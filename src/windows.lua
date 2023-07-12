@@ -19,7 +19,7 @@ window:set_icon(icon:get_pixbuf())
 
 local headerBar = Gtk.HeaderBar {
   title = "Optix DevHome",
-  subtitle = "Versión 0.0.4 - Ahora con GUI"
+  subtitle = "Versión 0.0.5 - Ahora con GUI"
 }
 
 local closeButton = Gtk.Button {
@@ -80,6 +80,7 @@ function creareProjectBtn:on_clicked()
 
   if createProjectQuestion1Response == Gtk.ResponseType.OK then
     local projectName = createProjectQuestion1Entry:get_text()
+    createProjectQuestion1:destroy()
     local createProjectQuestion2 = Gtk.Dialog {
       title = "Introduce la URL del repositorio Git",
       resizable = false,
@@ -103,6 +104,7 @@ function creareProjectBtn:on_clicked()
 
     if createProjectQuestion2Response == Gtk.ResponseType.OK then
       local repoURL = createProjectQuestion2Entry:get_text()
+      createProjectQuestion2:destroy()
       local createProjectQuestion3 = Gtk.Dialog {
         title = "¿Donde lo guardarás?",
         resizable = false,
@@ -131,50 +133,67 @@ function creareProjectBtn:on_clicked()
   
       if createProjectQuestion3Response == Gtk.ResponseType.OK then
         local directoryPath = createProjectQuestion3Entry:get_text()
+        createProjectQuestion3:destroy()
         local folderExists = os.execute("cd " .. directoryPath)
 
-      if folderExists then
-        local creatingProjectDialog = Gtk.MessageDialog {
-          parent = window,
-          message_type = Gtk.MessageType.INFO,
-          buttons = Gtk.ButtonsType.OK,
-          text = "Creando tu proyecto",
-       }
-       creatingProjectDialog:run()
-      else
+        if folderExists then
+          local creatingProjectDialog = Gtk.MessageDialog {
+            parent = window,
+            message_type = Gtk.MessageType.INFO,
+            buttons = Gtk.ButtonsType.OK,
+            text = "Creando tu proyecto",
+          }
+          creatingProjectDialog:show_all()
+          creatingProjectDialog:run()
+          local gitCommand = string.format("git clone %s %s", repoURL, directoryPath)
+          local cloneSuccess = os.execute(gitCommand)
+          if cloneSuccess then
+            local cloneSuccessWindow = Gtk.MessageDialog {
+              parent = window,
+              message_type = Gtk.MessageType.INFO,
+              buttons = Gtk.ButtonsType.OK,
+              text = "Proyecto creado en " .. directoryPath .." con éxito!"
+            }
+            cloneSuccessWindow:show_all()
+            cloneSuccessWindow:run()
+          end
+        else
         local confirmCreateDirDialog = Gtk.MessageDialog {
           parent = window,
           message_type = Gtk.MessageType.INFO,
           buttons = {
             { Gtk.STOCK_OK, Gtk.ResponseType.OK },
             { Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL },
-          }
+          },
           text = "Confirma si quieres crear el directorio",
           secondary_text = directoryPath
-       }
-       confirmCreateDirDialog:run()
+        }
+        confirmCreateDirDialog:show_all()
+        confirmCreateDirDialog:run()
 
-       if confirmCreateDirDialog:get_response() == Gtk.ResponseType.OK then
-        local createCommand = "mkdir " .. destinationPath
-        local createSuccess os.execute(createCommand)
+        if confirmCreateDirDialog:get_response() == Gtk.ResponseType.OK then
+          local createCommand = "mkdir " .. directoryPath
+          local createSuccess os.execute(createCommand)
 
-        if createSuccess then
-          creatingProjectDialog:run()
-        else
-          local errDialog = Gtk.MessageDialog {
-            parent = window,
-            message_type = Gtk.MessageType.ERROR,
-            buttons = Gtk.STOCK_OK, Gtk.ResponseType.OK,
-            text = "Error al crear la carpeta. Verifica los permisos de escritura."
-          }
-          errDialog:run()
-          return
+          if createSuccess then
+            creatingProjectDialog:show_all()
+            creatingProjectDialog:run()
+          else
+            local errDialog = Gtk.MessageDialog {
+              parent = window,
+              message_type = Gtk.MessageType.ERROR,
+              buttons = Gtk.STOCK_OK, Gtk.ResponseType.OK,
+              text = "Error al crear la carpeta. Verifica los permisos de escritura."
+            }
+            errDialog:run()
+            return
+          end
+        end
+      end
+    end
   end
 end
 
-  createProjectQuestion1:destroy()
-  createProjectQuestion2:destroy()
-end
 end
 
 function openProjectBtn:on_clicked()

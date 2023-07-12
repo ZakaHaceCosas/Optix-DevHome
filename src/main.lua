@@ -13,14 +13,14 @@ local userWantsGUIBeta = readInput(terminalTextColorYellow .. "Hey, developers! 
     end
 end
 
-print(terminalTextColorGreen .. terminalTextColorBold .. "Optix DevHome ALPHA 0.0.4 - 'Development just has to be connected.' - Idioma: ES\n------\n" .. terminalTextColorReset)
+print(terminalTextColorGreen .. terminalTextColorBold .. "Optix DevHome ALPHA 0.0.5 - 'Development just has to be connected.' - Idioma: ES\n------\n" .. terminalTextColorReset)
 
 -- we nicely say welcome, then ask if create project or open project
 isStartPromptValid = false
 
 dofile("ascii.lua")
 
-print(terminalTextColorGreen .. terminalTextColorBold .. "Optix DevHome ALPHA 0.0.4 - 'Development just has to be connected.' - Idioma: ES\n------\n" .. terminalTextColorReset)
+print(terminalTextColorGreen .. terminalTextColorBold .. "Optix DevHome ALPHA 0.0.5 - 'Development just has to be connected.' - Idioma: ES\n------\n" .. terminalTextColorReset)
 
 while not isStartPromptValid do
     local atStartPrompt = readInput("Bienvenido a Optix DevHome. ¿Qué quieres hacer?\nnew - Crear nuevo proyecto.\nopn - Abrir proyecto existente\nabout - Información sobre Optix DevHome\nend - Salir del programa")
