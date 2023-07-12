@@ -54,15 +54,55 @@ Just get it from [Lua's website](https://lua.org/download.html)
 
 ## Editing
 
-Ok, you're ready. Files are commented for you to easily get what does each line do. Just do your nice contribution, and when you're done, make a ***Pull Request***. Don't forget to comment your code and/or changes aswell.
+Ok, you're ready. How do you write *fancy* code on this project?
 
-For easier navigation, some comments have keywords (for when you use search in VSCode or your preference IDE).
+1. Use `local` variables almost always
+That way we can avoid naming issues
+**Do:**
+```
+local Bread = "I like bread"
+print(Bread)
+```
+**Don't**
+```
+Bread = "I like bread"
+print(Bread)
+```
+
+2. When naming variables, be very specific
+At the end we may have too many variables, so be specific with the naming.
+However, don't write TheEntireSentenceLikeThis.
+**Do:**
+```
+local Icon32PNG = "/img/icon-32.png"
+local UserConfirmRemoveProject = "Do you want to remove this project?"
+local Game1ExeFile = "/home/pico/game1.exe"
+```
+**Don't:**
+```
+local icon = "/img/icon-32.png"
+local question = "Do you want to remove this project?"
+local game = "/home/pico/game.exe"
+```
+
+3. Comment errors correctly
+For parts that don't work, add a comment using the ERR, WARN, NOTE system:
 
 `ERR` - That line isn't doing what it should and it's breaking the program.
 
 `WARN` - That line isn't doing what it should, but the rest of the program can run properly.
 
-`NOTE` - Things that are undone or that will be changed.
+`NOTE` - Things that are undone or that should (or will) be changed.
+
+Write things nicely and briefly.
+**Do:**
+```
+-- ERR: after replying it returns an error and stops the program
+UserFavouriteFood = readInput("Whats your favourite food?")
+if UserFavouriteFood = "bread"
+    print("you like bread? me too!")
+```
+4. Make ***Pull Requests***, never Direct Commits. Thanks :]
 
 ## Testing
 
