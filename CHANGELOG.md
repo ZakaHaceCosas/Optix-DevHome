@@ -1,5 +1,9 @@
 # Optix DevHome CHANGELOG
 Every update is logged here.
+## Version 0.0.5
+---
+- Succesfully implemented .optixData parsing (now need to add a function)
+- Upload of `windows.lua`, GTK based GUI version of Optix DevHome. **Needs reviewing**.
 ## Version 0.0.4
 ---
 - Finally, HALF implementation of the .optixData parser
