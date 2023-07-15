@@ -1,34 +1,34 @@
--- we look for /home/[user]/.OptixDevHome/projects.optixData
 lfs = require "lfs"
-osSeparator = package.config:sub(1, 1) -- We get the OS path separator
+osSeparator = package.config:sub(1, 1) -- Obtenemos el separador de ruta del sistema operativo
 
--- These are the paths for our project files
+-- Estas son las rutas para nuestros archivos de proyecto
 homeDir = os.getenv("HOME") or os.getenv("USERPROFILE") or ""
 configDirectoryPath = homeDir .. osSeparator .. ".OptixDevHome"
 configFilePath = configDirectoryPath .. osSeparator .. "projects.optixData"
 
 terminalTextColorRed = "\27[31m"
 terminalTextColorGreen = "\27[32m"
-terminalTextColorBold = "\27[1m" -- a format, not a color tho
+terminalTextColorBold = "\27[1m" -- un formato, no un color
 terminalTextColorYellow = "\27[33m"
 terminalTextColorBlue = "\27[36m"
-terminalTextColorReset = "\27[0m" -- add this at the end of each colored sentence
+terminalTextColorReset = "\27[0m" -- agregar esto al final de cada oración coloreada
 
--- Check if the config directory exists, create it if not
+-- Verificar si el directorio de configuración existe, crearlo si no
 if not lfs.attributes(configDirectoryPath, "mode") then
   lfs.mkdir(configDirectoryPath)
 end
 
--- Check if the config file exists, create it if not
+-- Verificar si el archivo de configuración existe, crearlo si no
 configFile = io.open(configFilePath, "a")
 if not configFile then
-  configFile = io.open(configFilePath, "a")
+  print("Error al abrir el archivo de configuración.")
+  os.exit(1)
 end
--- Now we have the data file. This will store our projects.
+configFile:close()
 
--- We read user's prompt onto the terminal
+-- Leer la entrada del usuario en la terminal
 function readInput(prompt)
-    io.write(prompt .. ": ")
-    io.flush()
-    return io.read()
+  io.write(prompt .. ": ")
+  io.flush()
+  return io.read()
 end

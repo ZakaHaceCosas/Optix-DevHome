@@ -1,8 +1,23 @@
 dofile("config.lua") -- tidy up by moving variables here
 dofile("optixDataParser.lua") -- THE PARSER (it took too long to make it work)
 
+if package.config:sub(1, 1) == '\\' then
+    os.execute("cls")
+  else
+    os.execute("clear")
+  end
+
 -- Here we ask for the proyect name and check if it's valid
-local projectName = readInput("\nPonle nombre a tu proyecto\n")
+local isProjectNameValid = false
+while not isProjectNameValid do
+  projectName = readInput("\nPonle nombre a tu proyecto\n")
+  if isExistingProject(projectName) then
+    print("El proyecto ya existe. ¡Intenta con otro nombre!")
+  else
+    isProjectNameValid = true
+    break
+  end
+end
 
 -- Default location of the folder we'll use for our repo
 local defaultDestination = homeDir .. "/dhp-" .. projectName
@@ -47,34 +62,15 @@ else
 end
 
 -- we save the project to our .optixData configFile
--- WARN - skipped behavior: this check doesnt work, projects still allow duplicates
-local function projectExists(projectName, configFile)
-    configFile:seek("set") --
-    local line = configFile:read("*line")
-    while line do
-      if line == projectName then
-        return true -- exists
-      end
-      line = configFile:read("*line")
-    end
-    return false -- does not exist (so we can create it)
-  end
-  
-  -- is it already on the file?
-  if projectExists(projectName, configFile) then
-    print(terminalTextColorRed .. "¡Error! El proyecto ya existe." .. terminalTextColorReset)
-    return -- end
-  end
-  
   -- if we create it, we write it to configFile
-  configFile:seek("end")
-  configFile:write(projectName .. "\n")
-  configFile:write("    path: " .. destinationPath .. "\n")
-  configFile:write("    repo: " .. repoURL .. "\n")
-  configFile:write("\n")
+configFile:seek("end")
+configFile:write(projectName .. "\n")
+configFile:write("    path: " .. destinationPath .. "\n")
+configFile:write("    repo: " .. repoURL .. "\n")
+configFile:write("\n")
   
-  configFile:flush()
-  configFile:close()
+configFile:flush()
+configFile:close()
   
 -- uses the native git command for cloning the repo.
 -- NOTE: we should make it verify if you have git or not, and if you dont, ask to install it
