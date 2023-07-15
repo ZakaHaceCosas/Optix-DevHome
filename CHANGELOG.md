@@ -1,5 +1,11 @@
 # Optix DevHome CHANGELOG
 Every update is logged here.
+## Version 0.0.6
+---
+- Refactor of the GUI
+- (Unsuccessful) attemps to implement project opening
+- Aditional changes to codebase
+- Upload of logo and favicon
 ## Version 0.0.5
 ---
 - Succesfully implemented .optixData parsing (now need to add a function)
