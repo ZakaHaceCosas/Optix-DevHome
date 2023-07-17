@@ -1,3 +1,4 @@
+-- About Optix DevHome.
 dofile("config.lua")
 
 if package.config:sub(1, 1) == '\\' then

@@ -1,3 +1,4 @@
+-- NOTE: THIS FILE IS NOT DOCUMENTED YET
 dofile("config.lua")
 
 lgi = require "lgi"
@@ -101,7 +102,7 @@ local favicon = Gtk.Image.new_from_file("assets/favicon.png")
 
 local headerBar = Gtk.HeaderBar {
   title = "Optix DevHome",
-  subtitle = "Versión 0.0.6 - LuaFTW"
+  subtitle = "Versión 0.0.7 - Open source, built with Lua chad"
 }
 
 local closeButton = Gtk.Button {
