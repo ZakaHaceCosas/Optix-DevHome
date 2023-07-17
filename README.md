@@ -7,27 +7,31 @@ The objective of Optix DevHome is to create a simple but powerful solution for b
 
 ## What to implement:
 
-> **Bold** = Implemented<br>***Bold + Italic*** = Implemented and tested<br>Normal = Non implemented / Working on it:
-
-- ***Connect to remote Git repositories and clone them onto user's selected location.***
-- Send PRs, commits, and more.
-- Implement Projects
-    - **Basic Project saving**
+- [X] Connect to remote Git repositories and clone them onto user's selected location.
+- [ ] Send PRs, commits, and more.
+- [ ] Implement Projects
+    - [X] Basic Project saving
         - Advanced Project saving
-            - Project setups
+            - [ ] Project setups
             > Project setups are a way to speed up workflows: you click once, and all the programs you need are open and all the libraries & dependencies you need get updated and installed if needed. (That's the idea tho)
-            - Project files
-            - Project sharing
-- Multiple languages
+            - [X] Project files
+            - [X] Project updating
+                - [ ] Secure project updating
+            - [ ] Project sharing
+- [ ] Multiple languages
 > *Note: Optix DevHome will be first developed in spanish, then ported to english, and after that we'll see. This isn't a priority for now.*
-- GUI
-    - GUI based on the Umbra design system (Link to Figma soon)
+- [ ] GUI
+    - [ ] GUI based on the Umbra design system (Link to Figma (very) soon)
 
 ## Documentation
 
 ### Set up
 
-You will need to install Lua to work on this project. For now it's not using any other library or framework.
+You will need to install Lua to work on this project. Also you will need the Luarocks Package Manager to install the libraries we use.
+Libraries:
+- LuaSocket
+- RapidJSON
+- LuaFileSystem
 
 Don't have Lua? Here's the command for major Linux systems, macOS, and Windows.
 - **Debian or Ubuntu**
@@ -51,7 +55,6 @@ brew install lua
 - **Windows**
 
 Just get it from [Lua's website](https://lua.org/download.html)
-
 ## Editing
 
 Ok, you're ready. How do you write *fancy* code on this project?
@@ -72,6 +75,7 @@ print(Bread)
 2. When naming variables, be very specific
 At the end we may have too many variables, so be specific with the naming.
 However, don't write TheEntireSentenceLikeThis.
+
 **Do:**
 ```
 local Icon32PNG = "/img/icon-32.png"

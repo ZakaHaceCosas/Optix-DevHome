@@ -1,6 +1,6 @@
 {
     "name": "Optix DevHome",
-    "version": "0.0.6",
+    "version": "0.0.7",
     "author": {
       "name": "Optix",
       "website": "https://optix.rf.gd/bio"
@@ -27,5 +27,5 @@
     "contributors": "AUTHORS.md",
     "documentation": "README.md",
     "createdAt": "2023-07-08",
-    "updatedAt": "2023-07-16"
+    "updatedAt": "2023-07-08"
   }
