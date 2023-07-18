@@ -2,4 +2,4 @@ Optix:
 - Creator
 - Main developer
 
-For now there isn't anyone else.
+> Copyright &copy; 1994–2023 Lua.org, PUC-Rio.
