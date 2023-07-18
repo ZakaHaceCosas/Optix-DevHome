@@ -125,3 +125,15 @@ Just like that, the program will run on the terminal, ready to test.
 
 
 Well, that's it! You're now ready to write some fancy code on this project. Have fun and thanks for contributing!
+
+## Acknowledgments
+
+Contributors:
+- For now I am the only one working on this project, so...
+
+OSS used:
+<!--this is actually here because it needs to be: i just noticed Lua required this for it's usage XD
+they deserve it tho, lua is just so cool-->
+- A shoutout to the amazing team who created the Lua programming language, at PUC-Rio (Lua.org).
+
+Copyright &copy; 1994–2023 Lua.org, PUC-Rio.
