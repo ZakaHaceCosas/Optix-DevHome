@@ -33,7 +33,7 @@ Libraries:
 - RapidJSON
 - LuaFileSystem
 
-Don't have Lua? Here's the command for major Linux systems, macOS, and Windows.
+### Install Lua 5.3
 - **Debian or Ubuntu**
 ```bash
 sudo apt-get install lua5.3
@@ -55,6 +55,26 @@ brew install lua
 - **Windows**
 
 Just get it from [Lua's website](https://lua.org/download.html)
+
+After that, install [the Luarocks package manager](https://luarocks.org), and install the following packages:
+```bash
+(sudo) luarocks install luasocket
+```
+```bash
+(sudo) luarocks install rapidjson
+```
+```bash
+(sudo) luarocks install lgi
+```
+```bash
+(sudo) luarocks install luafilesystem
+```
+For info:
+- LuaSocket: For HTTP requests (for coming soon features...)
+- RapidJSON: JSON encoding and decoding (for project data)
+- LGI: GTK for Lua (for GUI version)
+- LuaFileSystem: LFS is a library for easier access to users file system (for project data)
+
 ## Editing
 
 Ok, you're ready. How do you write *fancy* code on this project?
