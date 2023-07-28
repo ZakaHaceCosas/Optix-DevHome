@@ -1,4 +1,8 @@
+-- DEPRECATED
+
+-- This file is not intended to be further modified by contributors (as of now)
 -- NOTE: THIS FILE IS NOT DOCUMENTED YET
+-- Also, it's not the main priority. We'll focus on the CLI version until the main features are stable.
 dofile("config.lua")
 
 lgi = require "lgi"
@@ -25,6 +29,11 @@ local window = Gtk.Window {
 local cssProvider = Gtk.CssProvider.new()
 cssProvider:load_from_data([[
   window {
+    background-color: #070707;
+    font-family: "Outfit";
+  }
+
+  .window {
     background-color: #070707;
     font-family: "Outfit";
   }
@@ -92,17 +101,18 @@ cssProvider:load_from_data([[
 
 local screen = Gdk.Screen.get_default()
 local context = Gtk.StyleContext()
-context.add_provider_for_screen(screen, cssProvider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
+context.add_provider_for_screen(screen, cssProvider, Gtk.STYLE_PROVIDER_PRIORITY_USER)
 
 local icon = Gtk.Image.new_from_file("assets/icon.png")
 window:set_icon(icon:get_pixbuf())
+window:get_style_context():add_class('window')
 
 local favicon = Gtk.Image.new_from_file("assets/favicon.png")
 
 
 local headerBar = Gtk.HeaderBar {
   title = "Optix DevHome",
-  subtitle = "Versión 0.0.7 - Open source, built with Lua chad"
+  subtitle = "Versión 0.0.8 - Open source, built with Lua chad"
 }
 
 local closeButton = Gtk.Button {

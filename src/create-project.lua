@@ -77,7 +77,7 @@ else
     else
         -- "Proportionate another destination path"
         -- I havent got this line ever while testing the program, I swear XD.
-        -- From v0.0.1 until now (0.0.7), never.
+        -- From v0.0.1 until now (0.0.8), never.
         print("\nProporciona otra ruta de destino.\n")
         return
     end
@@ -85,12 +85,12 @@ end
 
 -- we use git to normally clone the code in our file system
 -- NOTE: idea: if user doesnt have git installed, ask him if he wants Optix DevHome to install it for him.
--- (maybe we could even pack git directly with the .exe or .deb program file, who knows?)
+-- (maybe we could even pack git directly with the program, who knows?)
 local gitCommand = string.format("git clone %s %s", repoURL, destinationPath)
 local cloneSuccess = os.execute(gitCommand)
 
 if cloneSuccess then
-    -- IT WORKED YOUR PROJECT WAS CREATEDq!!11111
+    -- IT WORKED YOUR PROJECT WAS CREATED!!11111
     print(terminalTextColorGreen .. terminalTextColorBold .. "\n¡Proyecto creado en " .. destinationPath .. " con éxito!\n" .. terminalTextColorReset)
 else
     -- nope, it did NOT work

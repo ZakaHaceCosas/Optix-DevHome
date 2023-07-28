@@ -1,7 +1,7 @@
 http = require "socket.http" -- LuaSocket (Unused (For now)) -- With this we can make HTTP and HTTPS requests.
 json = require "rapidjson" -- RapidJSON - It's JSON. It's Rapid. Over.
 lfs = require "lfs" -- LuaFileSystem - easier interaction with user's file system
-osSeparator = package.config:sub(1, 1) -- Obtenemos el separador de ruta del sistema operativo
+osSeparator = package.config:sub(1, 1) -- We get the system separatory path
 
 -- paths for our files
 homeDir = os.getenv("HOME") or os.getenv("USERPROFILE") or ""

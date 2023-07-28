@@ -7,6 +7,3 @@ print(terminalTextColorRed .. [[\ \_/ /| |      | |   _| |_ / /^\ \     | |/ / |
 print(terminalTextColorBlue .. [[ \___/ \_|      \_/   \___/ \/   \/     |___/  \____/  \___/ \_| |_/ \___/ \_|  |_/\____/ ]] .. terminalTextColorReset)
 print("")
 print("")
-print(terminalTextColorBold .. "v0.0.7" .. terminalTextColorReset)
-print("")
-print("")

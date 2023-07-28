@@ -1,9 +1,6 @@
 dofile("config.lua")
 
--- We ask what to open
-local projectNameToOpen = readInput("\n¿Qué proyecto buscas?\n")
-
--- We look on our configFile
+-- Function to search for the project
 local function searchProjectToOpen(name)
   configFile:seek("set")
   local line = configFile:read()
@@ -17,49 +14,108 @@ local function searchProjectToOpen(name)
   return nil
 end
 
--- we execute the function
-local projectData = searchProjectToOpen(projectNameToOpen)
+-- Function to remove the project from existence
+local function removeProjectByName(name)
+  configFile:seek("set")
+  local content = configFile:read("*a")
+  local decodedData = json.decode(content)
 
-if projectData then
-  -- print the data (to prove we actually found it)
-  print(terminalTextColorGreen .. "\nEncontrado:" .. terminalTextColorReset)
-  print("  Nombre: " .. projectData.projectSavedName)
-  print("  Ruta: " .. projectData.projectSavedPath)
-  print("  Repo: " .. projectData.projectSavedRepo)
-  print("------")
-  -- some elements are commented, as they aren't implemented yet
-  print("¿Qué deseas hacer ahora?")
-  print("  Actualizar: " .. terminalTextColorBold .. "update" .. terminalTextColorReset)
-  -- print("  Enviar cambios: " .. terminalTextColorBold .. "pull" .. terminalTextColorReset)
-  -- print("  Comparar cambios y actualizar: " .. terminalTextColorBold .. "sync" .. terminalTextColorReset)
-  print("  Ayuda sobre cada comando: " .. terminalTextColorBold .. "help" .. terminalTextColorReset)
-  -- print(terminalTextColorYellow .. "  Iniciar: " .. terminalTextColorBold .. "Iniciar el proyecto" .. terminalTextColorReset)
-  local whatToDo = readInput("")
-  if whatToDo == "help" then
-    print("\n" .. terminalTextColorBold .. "update" .. terminalTextColorReset .. " - Actualiza directamente el código fuente, sobrescribiendo el contenido anterior.")
-  elseif whatToDo == "update" then
-    local wantsToUpdate = readInput(terminalTextColorBlue .. "\n¿Deseas actualizar? (y/n)\n" .. terminalTextColorReset .. terminalTextColorRed .. "¡Esto sobrescribirá todos los cambios que hayas hecho!" .. terminalTextColorReset)
-    if wantsToUpdate == "y" then
-      local repoURL = projectData.projectSavedRepo
-      local destinationPath = projectData.projectSavedPath
-      
-      local clearCommand = string.format("rm -rf %s", destinationPath)
-      local clearSuccess = os.execute(clearCommand)
-      if clearSuccess then
-        print(terminalTextColorGreen .. "\nDespejado con éxito, actualizando...\n" .. terminalTextColorReset)
-        local gitCommand = string.format("git clone %s %s", repoURL, destinationPath)
-        local updateSuccess = os.execute(gitCommand)
-        if updateSuccess then
-          print(terminalTextColorGreen .. "\nActualizado con éxito.\n" .. terminalTextColorReset)
-        else
-          print(terminalTextColorRed .. "\nError al actualizar el repositorio: Error de Git\n" .. terminalTextColorReset)
-        end
+  if type(decodedData) == "table" then
+    local found = false
+    for i, project in ipairs(decodedData) do
+      if project.projectSavedName == name then
+        table.remove(decodedData, i)
+        found = true
+        break
+      end
+    end
+
+    if found then
+      configFile:seek("set")
+      configFile:write(json.encode(decodedData))
+      return true  -- Success flag
+    else
+      return false  -- Failure flag
+    end
+  else
+    return false  -- Failure flag if the JSON content is not valid
+  end
+end
+
+local function listAllProjects()
+  configFile:seek("set")
+  local line = configFile:read()
+  while line do
+    local decodedLine = json.decode(line)
+    if decodedLine then
+      print("Nombre: " .. decodedLine.projectSavedName)
+      print("Ruta: " .. decodedLine.projectSavedPath)
+      print("Repo: " .. decodedLine.projectSavedRepo)
+      print("------")
+    end
+    line = configFile:read()
+  end
+end
+
+-- Function to check if GINIT is working
+local function isGINITWorking()
+  local isGINITWorkingCommand = "git rev-parse --is-inside-work-tree"
+  local isGINITWorkingHandle = io.popen(isGINITWorkingCommand)
+  local isGINITWorkingResult = isGINITWorkingHandle:read("*a")
+  isGINITWorkingHandle:close()
+  return isGINITWorkingResult:match("^true$")
+end
+
+-- Main function to handle user input
+local function main()
+  local projectNameToOpen = readInput("\n¿Qué proyecto buscas?\nDale a Enter sin introducir nada para listar todos tus proyectos\n")
+  -- Check if the user entered a project name
+  if projectNameToOpen == "" then
+    -- If no project name provided, list all projects
+    listAllProjects()
+    main() -- Ask again for the project name
+    return
+  end
+
+  local projectData = searchProjectToOpen(projectNameToOpen)
+
+  if projectData then
+    print(terminalTextColorGreen .. "\nEncontrado:" .. terminalTextColorReset)
+    print("  Nombre: " .. projectData.projectSavedName)
+    print("  Ruta: " .. projectData.projectSavedPath)
+    print("  Repo: " .. projectData.projectSavedRepo)
+    print("------")
+
+    local wantsToDoSmth = false
+    while not wantsToDoSmth do
+      print("¿Qué deseas hacer ahora?")
+      print("  Actualizar: " .. terminalTextColorBold .. "update" .. terminalTextColorReset)
+      print("  Enviar cambios: " .. terminalTextColorBold .. "submit" .. terminalTextColorReset)
+      print("  Eliminar: " .. terminalTextColorBold .. "rm" .. terminalTextColorReset)
+      print("")
+      print("  Ayuda sobre cada comando: " .. terminalTextColorBold .. "help" .. terminalTextColorReset)
+
+      local whatToDo = readInput("")
+      if whatToDo == "help" then
+        -- use open-cmd-[command] to optimise this code
+        -- (open-cmd = open project command)
+        dofile("open-cmd-help.lua")
+      elseif whatToDo == "update" then
+        dofile("open-cmd-update.lua")
+      elseif whatToDo == "rm" then
+        -- you may have realised we dont use /open-cmds or something like that
+        -- dofile() doesn't support that as of now
+        dofile("open-cmd-rm.lua")
+      elseif whatToDo == "submit" then
+        dofile("open-cmd-submit.lua")
       else
-        print(terminalTextColorRed .. "\nError al actualizar el repositorio: No se pudo despejar el directorio del proyecto\n" .. terminalTextColorReset)
+        print(terminalTextColorRed .. "\nComando desconocido\n" .. terminalTextColorReset)
       end
     end
   else
-  -- 404 - Not found (bruh this is not HTTP)
-  print(terminalTextColorRed .. "\nNo se encontró el proyecto.\n" .. terminalTextColorReset)
+    print(terminalTextColorRed .. "\nError: Comando no reconocido O el proyecto no existe.\n" .. terminalTextColorReset)
   end
 end
+
+-- Execute the main function
+main()
