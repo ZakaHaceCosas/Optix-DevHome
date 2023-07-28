@@ -1,6 +1,7 @@
-# Optix-DevHome
+# Optix DevHome
 "*Development just has to be connected*"
 ---
+> Soon renaming from **DevHome** to **DevHub**
 ## About
 
 The objective of Optix DevHome is to create a simple but powerful solution for both solo developers & team developers, built on top of the **Lua** programming language.
@@ -46,15 +47,11 @@ sudo dnf install lua
 ```bash
 sudo pacman -S lua
 ```
-- **macOS**
-```
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
-brew install lua
-```
 - **Windows**
 
 Just get it from [Lua's website](https://lua.org/download.html)
+
+> Note DevHub is not supported on macOS as of now, so code won't work properly on Apple devices.
 
 After that, install [the Luarocks package manager](https://luarocks.org), and install the following packages:
 ```bash
@@ -81,6 +78,7 @@ Ok, you're ready. How do you write *fancy* code on this project?
 
 1. Use `local` variables almost always
 That way we can avoid naming issues
+
 **Do:**
 ```
 local Bread = "I like bread"
@@ -119,6 +117,7 @@ For parts that don't work, add a comment using the ERR, WARN, NOTE system:
 `NOTE` - Things that are undone or that should (or will) be changed.
 
 Write things nicely and briefly.
+
 **Do:**
 ```
 -- ERR: after replying it returns an error and stops the program
