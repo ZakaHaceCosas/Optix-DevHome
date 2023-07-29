@@ -1,10 +1,12 @@
-# Optix DevHome
+# Optix DevHub
 "*Development just has to be connected*"
 ---
-> Soon renaming from **DevHome** to **DevHub**
+> Recently renamed from **DevHome** to **DevHub**
+
+> Soon moving docs to the [official website](https://optix.rf.gd/apps/devhub/) aswell
 ## About
 
-The objective of Optix DevHome is to create a simple but powerful solution for both solo developers & team developers, built on top of the **Lua** programming language.
+The objective of Optix DevHub is to create a simple but powerful solution for both solo developers & team developers, built on top of the **Lua** programming language.
 
 ## What to implement:
 
@@ -20,7 +22,7 @@ The objective of Optix DevHome is to create a simple but powerful solution for b
                 - [ ] Secure project updating
             - [ ] Project sharing
 - [ ] Multiple languages
-> *Note: Optix DevHome will be first developed in spanish, then ported to english, and after that we'll see. This isn't a priority for now.*
+> *Note: Optix DevHub will be first developed in spanish, then ported to english, and after that we'll see. This isn't a priority for now.*
 - [ ] GUI
     - [ ] GUI based on the Umbra design system (Link to Figma (very) soon)
 
